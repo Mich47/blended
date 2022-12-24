@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import css from './Modal.module.css';
 export const Modal = ({ avatar: { src, alt }, onCloseModal }) => {
   return (
@@ -10,4 +12,12 @@ export const Modal = ({ avatar: { src, alt }, onCloseModal }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  avatar: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+  }).isRequired,
+  onCloseModal: PropTypes.func.isRequired,
 };

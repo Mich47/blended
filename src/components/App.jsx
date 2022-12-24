@@ -28,6 +28,7 @@ export class App extends Component {
       id: nanoid(),
       ...data,
       hasJob: false,
+      avatar: '',
     };
 
     this.setState(prevState => ({

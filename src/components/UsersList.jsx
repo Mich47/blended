@@ -35,8 +35,10 @@ UserList.propTypes = {
       name: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
       hasJob: PropTypes.bool.isRequired,
+      avatar: PropTypes.string.isRequired,
     }).isRequired
   ),
   onDelete: PropTypes.func.isRequired,
   onToggleStatus: PropTypes.func.isRequired,
+  onModalOpen: PropTypes.func.isRequired,
 };

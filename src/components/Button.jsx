@@ -8,7 +8,7 @@ export const Button = ({ text, clickHandler }) => {
   );
 };
 
-// Button.propTypes = {
-//   text: PropTypes.string.isRequired,
-//   clickHandler: PropTypes.func.isRequired,
-// };
+Button.propTypes = {
+  text: PropTypes.string.isRequired,
+  clickHandler: PropTypes.func.isRequired,
+};
