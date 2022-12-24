@@ -1,26 +1,45 @@
-import { Profile } from './Profile/Profile';
-import { Statistics } from './Statistics/Statistics';
-import { FriendList } from './FriendList/FriendList';
-import { TransactionHistory } from './TransactionHistory/TransactionHistory';
-import user from '../assets/user.json';
-import data from '../assets/data.json';
-import friends from '../assets/friends.json';
-import transactions from '../assets/transactions.json';
+import { nanoid } from 'nanoid';
+import { Component } from 'react';
+import { data } from '../data/data';
+import { Button } from './Button';
+import { Form } from './Form';
+import { UserList } from './UsersList';
 
-export const App = () => {
-  return (
-    <>
-      <Profile
-        username={user.username}
-        tag={user.tag}
-        location={user.location}
-        avatar={user.avatar}
-        stats={user.stats}
-      />
-      <Statistics title="Upload stats" stats={data} />
-      <Statistics stats={data} />
-      <FriendList friends={friends} />
-      <TransactionHistory items={transactions} />
-    </>
-  );
-};
+export class App extends Component {
+  state = {
+    users: data,
+    isFormOpen: false,
+  };
+
+  handleDelete = id => {
+    this.setState(prevState => ({
+      users: prevState.users.filter(user => user.id != id),
+    }));
+  };
+
+  openForm = () => {
+    this.setState({ isFormOpen: true });
+  };
+
+  addUser = data => {
+    const newUser = {
+      id: nanoid(),
+      ...data,
+    };
+    this.setState(prevState => ({ users: [...prevState.users, newUser] }));
+  };
+
+  render() {
+    const { users, isFormOpen } = this.state;
+    return (
+      <>
+        <UserList users={users} onDelete={this.handleDelete} />
+        {isFormOpen ? (
+          <Form addUser={this.addUser} />
+        ) : (
+          <Button text="Add user" clickHandler={this.openForm} />
+        )}
+      </>
+    );
+  }
+}
